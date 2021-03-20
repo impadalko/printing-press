@@ -1,0 +1,7 @@
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "rootDir": "src",
+  "compilerOptions": {
+    "outDir": "dist"
+  }
+}

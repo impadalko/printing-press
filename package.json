@@ -1,0 +1,24 @@
+{
+  "name": "printing-press",
+  "version": "0.1.0",
+  "description": "A Markdown static site generator built in TypeScript",
+  "main": "./dist/api/index.js",
+  "repository": "https://github.com/impadalko/printing-press.git",
+  "author": "impadalko",
+  "license": "GPL-3.0-or-later",
+  "private": false,
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint --max-warnings 0 src/"
+  },
+  "bin": {
+    "printing-press": "./bin/index.js"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "eslint": "^7.22.0",
+    "typescript": "^4.2.3"
+  }
+}
