@@ -31,6 +31,18 @@ module.exports = {
         'semi': [
             'error',
             'never'
+        ],
+        'max-len': [
+            'error',
+            { 'code': 100 }
+        ],
+        'object-curly-spacing': [
+            'error',
+            'always'
+        ],
+        'array-bracket-spacing': [
+            'error',
+            'always'
         ]
     }
 }
