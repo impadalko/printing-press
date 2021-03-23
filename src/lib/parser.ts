@@ -3,8 +3,7 @@ import readline from 'readline'
 import YAML from 'yaml'
 
 export interface ParsedFile {
-  title: string;
-  template: string;
+  header: unknown;
   content: string[];
 }
 
@@ -15,40 +14,52 @@ class ParsingError extends Error {
   }
 }
 
-export const parseFile = async (path: string): Promise<ParsedFile> => {
+export const parseFile = async (path: string, headerDelimiter = '+++'): Promise<ParsedFile> => {
   const fileStream = fs.createReadStream(path)
-  const lines = readline.createInterface({
+  const linesInterface = readline.createInterface({
     input: fileStream,
     crlfDelay: Infinity
   })
 
-  let readingHeader = false
-  let header = ''
-  const content = []
-  for await (const line of lines) {
-    if (line === '+++') {
-      if (!readingHeader && header)
-        throw new ParsingError('Header being defined more than once')
-      readingHeader = !readingHeader
-      continue
-    }
+  const lines = []
+  for await (const line of linesInterface)
+    lines.push(line)
 
-    if (readingHeader) {
+  let header = ''
+  const closedHeader = lines.some((line, index) => {
+    if(index === 0 && line !== headerDelimiter)
+      throw new ParsingError('First line must be a header delimiter')
+    if(index !== 0 && line === headerDelimiter)
+      return true
+    if(line !== headerDelimiter){
       header += `${line}\n`
-    } else {
-      content.push(line)
+      return false
     }
-  }
-  if (readingHeader)
+  })
+
+  if(!closedHeader)
     throw new ParsingError('Header was never closed')
+
+  let parsedHeader = null
   try {
-    const parsedHeader = YAML.parse(header)
-    return {
-      title: parsedHeader.title,
-      template: parsedHeader.template,
-      content: content
-    }
+    parsedHeader = YAML.parse(header)
   } catch (e) {
     throw new ParsingError('Header is not a valid YAML')
+  }
+
+  let delimiterCount = 0
+  const content: string[] = []
+  lines.forEach((line) => {
+    if (delimiterCount < 2){
+      if (line === headerDelimiter)
+        delimiterCount++
+    }
+    else
+      content.push(line)
+  })
+
+  return {
+    header: parsedHeader,
+    content: content
   }
 }

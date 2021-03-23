@@ -9,8 +9,8 @@
   "private": false,
   "scripts": {
     "build": "tsc",
-    "test": "yarn jest tests/",
-    "lint": "eslint --max-warnings 0 src/"
+    "test": "jest tests/",
+    "lint": "eslint --max-warnings 0 src/ tests/"
   },
   "bin": {
     "printing-press": "./bin/index.js"

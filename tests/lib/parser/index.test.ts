@@ -1,14 +1,22 @@
 import { parseFile } from '../../../src/lib/parser'
 
-test('Parses correctly formatted file', () => {
+test('Parses correctly formatted file with non-empty header', () => {
   return parseFile(`${__dirname}/correctFile.md`).then(data => {
-    expect(data).toEqual({title: 'Correct file', template: 'example', content: ['', 'Amazing example!']})
+    expect(data).toEqual({
+      header: {
+        title: 'Correct file', template: 'example'
+      },
+      content: [ '', 'Amazing example!' ]
+    })
   })
 })
 
-test('Throws error on file with multiple headers', () => {
-  return parseFile(`${__dirname}/multipleHeaders.md`).catch(error => {
-    expect(error.message).toMatch('Header being defined more than once')
+test('Parses correctly formatted file with empty header', () => {
+  return parseFile(`${__dirname}/emptyHeader.md`).then(data => {
+    expect(data).toEqual({
+      header: null,
+      content: [ '', 'Amazing example!' ]
+    })
   })
 })
 
@@ -21,5 +29,11 @@ test('Throws error on file with open header', () => {
 test('Thows error on file with invalid header', () => {
   return parseFile(`${__dirname}/invalidHeader.md`).catch(error => {
     expect(error.message).toMatch('Header is not a valid YAML')
+  })
+})
+
+test('Thows error on file not opening a header on the first line', () => {
+  return parseFile(`${__dirname}/withoutHeader.md`).catch(error => {
+    expect(error.message).toMatch('First line must be a header delimiter')
   })
 })
