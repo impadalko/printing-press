@@ -3,5 +3,6 @@
   "rootDir": "src",
   "compilerOptions": {
     "outDir": "dist"
-  }
+  },
+  "exclude": ["tests/"]
 }
