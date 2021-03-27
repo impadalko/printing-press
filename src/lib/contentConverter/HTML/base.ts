@@ -1,6 +1,6 @@
 export enum HTMLTag {
   P = 'p',
-  None = 'none'
+  None = 'none',
 }
 
 export class HTMLItem {
@@ -12,6 +12,6 @@ export class HTMLItem {
   }
 
   extend(line: string): void {
-    this.content +=  ' ' + line
+    this.content += ' ' + line
   }
 }
