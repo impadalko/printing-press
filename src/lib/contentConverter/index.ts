@@ -4,6 +4,12 @@ type OptionalHTMLItem = HTML.HTMLItem | null
 
 const getNextHTMLItem = (current: OptionalHTMLItem, line: string): OptionalHTMLItem => {
   if (line === '') return null
+  if (line.startsWith('# ')) return new HTML.H1(line)
+  if (line.startsWith('## ')) return new HTML.H2(line)
+  if (line.startsWith('### ')) return new HTML.H3(line)
+  if (line.startsWith('#### ')) return new HTML.H4(line)
+  if (line.startsWith('##### ')) return new HTML.H5(line)
+  if (line.startsWith('###### ')) return new HTML.H6(line)
   if (current !== null && current instanceof HTML.P) {
     current.extend(line)
     return current

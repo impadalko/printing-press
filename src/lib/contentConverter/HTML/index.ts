@@ -1,2 +1,3 @@
-export { HTMLTag, HTMLItem } from './base'
-export { P } from './p'
+export * from './base'
+export * from './p'
+export * from './headings'
