@@ -10,8 +10,4 @@ export class HTMLItem {
   getParsed(): string {
     return this.type !== HTMLTag.None ? `<${this.type}>${this.content}</${this.type}>` : ''
   }
-
-  extend(line: string): void {
-    this.content += ' ' + line
-  }
 }
