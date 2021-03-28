@@ -17,7 +17,7 @@ test('Converts regular lines to HTML paragraphs', () => {
   result = convert(['abc', '', 'cba'])
   expect(result).toBe('<p>abc</p>\n<p>cba</p>\n')
   result = convert(['abc\\', 'cba'])
-  expect(result).toBe('<p>abc<br/> cba</p>\n')
+  expect(result).toBe('<p>abc<br> cba</p>\n')
   result = convert(['#abc'])
   expect(result).toBe('<p>#abc</p>\n')
 })
