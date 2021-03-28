@@ -57,4 +57,21 @@ test('Converts blocks of code to HTML code + pre tags', () => {
   expect(result).toBe('<pre><code>abc\n cba\n</code></pre>\n')
   result = convert(['```', 'abc', '', 'cba', '```'])
   expect(result).toBe('<pre><code>abc\n\ncba\n</code></pre>\n')
+  result = convert(['```', 'abc', '>', 'cba', '```'])
+  expect(result).toBe('<pre><code>abc\n>\ncba\n</code></pre>\n')
+})
+
+test('Converts quotes to HTML blockquote tags', () => {
+  let result = convert(['>'])
+  expect(result).toBe('<blockquote></blockquote>\n')
+  result = convert(['> a'])
+  expect(result).toBe('<blockquote><p>a</p></blockquote>\n')
+  result = convert(['> a', '> b'])
+  expect(result).toBe('<blockquote><p>a b</p></blockquote>\n')
+  result = convert(['> a', '> > b', '> c'])
+  expect(result).toBe(
+    '<blockquote><p>a</p>\n<blockquote><p>b</p></blockquote>\n<p>c</p></blockquote>\n'
+  )
+  result = convert(['> a', '', '> b'])
+  expect(result).toBe('<blockquote><p>a</p></blockquote>\n<blockquote><p>b</p></blockquote>\n')
 })

@@ -1,7 +1,8 @@
 import { HTMLTag, HTMLItem } from './base'
 import { format } from './formatter'
 
-class Heading extends HTMLItem {
+class Heading implements HTMLItem {
+  type = HTMLTag.None
   content = ''
 
   getParsed(): string {

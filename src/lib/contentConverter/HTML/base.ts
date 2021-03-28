@@ -1,4 +1,5 @@
 export enum HTMLTag {
+  Code = 'code',
   H1 = 'h1',
   H2 = 'h2',
   H3 = 'h3',
@@ -7,14 +8,13 @@ export enum HTMLTag {
   H6 = 'h6',
   HR = 'hr',
   P = 'p',
-  Code = 'code',
+  Quote = 'blockquote',
   None = 'none',
 }
 
-export class HTMLItem {
-  type: HTMLTag = HTMLTag.None
-
-  getParsed(): string {
-    throw new Error('Cannot call getParsed() of HTMLItem. Did you forget to override this method?')
-  }
+export interface HTMLItem {
+  type: HTMLTag
+  getParsed: () => string
 }
+
+export type OptionalHTMLItem = HTMLItem | null

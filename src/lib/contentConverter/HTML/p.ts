@@ -5,17 +5,16 @@ const parseLine = (line: string) => {
   return format(line.replace(/\\$/, '<br>'))
 }
 
-export class P extends HTMLItem {
+export class P implements HTMLItem {
+  type = HTMLTag.P
   content: string
 
   constructor(line: string) {
-    super()
     this.content = parseLine(line)
-    this.type = HTMLTag.P
   }
 
-  extend(line: string): void {
-    this.content += ' ' + parseLine(line)
+  extend(p: P): void {
+    this.content += ' ' + p.content
   }
 
   getParsed(): string {
