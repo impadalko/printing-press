@@ -1,8 +1,8 @@
 import { HTMLTag, HTMLItem } from './base'
+import { format } from './formatter'
 
-// TODO: Add support for links
 const parseLine = (line: string) => {
-  return line.replace(/\\$/, '<br>')
+  return format(line.replace(/\\$/, '<br>'))
 }
 
 export class P extends HTMLItem {
