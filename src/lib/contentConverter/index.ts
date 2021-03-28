@@ -10,6 +10,7 @@ const getNextHTMLItem = (current: OptionalHTMLItem, line: string): OptionalHTMLI
   if (line.startsWith('#### ')) return new HTML.H4(line)
   if (line.startsWith('##### ')) return new HTML.H5(line)
   if (line.startsWith('###### ')) return new HTML.H6(line)
+  if (line === '---') return new HTML.HR()
   if (current !== null && current instanceof HTML.P) {
     current.extend(line)
     return current

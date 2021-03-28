@@ -40,3 +40,8 @@ test('Converts markdown headings to HTML headings', () => {
   result = convert(['# abc', '', '# cba'])
   expect(result).toBe('<h1>abc</h1>\n<h1>cba</h1>\n')
 })
+
+test('Converts triple dash to HTML horizontal rule', () => {
+  const result = convert(['---'])
+  expect(result).toBe('<hr>\n')
+})
