@@ -45,3 +45,16 @@ test('Converts triple dash to HTML horizontal rule', () => {
   const result = convert(['---'])
   expect(result).toBe('<hr>\n')
 })
+
+test('Converts blocks of code to HTML code + pre tags', () => {
+  let result = convert(['```'])
+  expect(result).toBe('<pre><code></code></pre>\n')
+  result = convert(['```', '```'])
+  expect(result).toBe('<pre><code></code></pre>\n')
+  result = convert(['```', 'abc', '```'])
+  expect(result).toBe('<pre><code>abc</code></pre>\n')
+  result = convert(['```', 'abc', ' cba', '```'])
+  expect(result).toBe('<pre><code>abc\n cba</code></pre>\n')
+  result = convert(['```', 'abc', '', 'cba', '```'])
+  expect(result).toBe('<pre><code>abc\n\ncba</code></pre>\n')
+})

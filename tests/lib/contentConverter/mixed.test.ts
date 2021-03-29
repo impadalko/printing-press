@@ -14,3 +14,14 @@ test('Convert mixed paragraphs and headings correctly', () => {
   result = convert(['abc', '', 'cba', '# def'])
   expect(result).toBe('<p>abc</p>\n<p>cba</p>\n<h1>def</h1>\n')
 })
+
+test('Convert blocks of code with paragraphs and headings correctly', () => {
+  let result = convert(['abc', '```', 'cba', '```'])
+  expect(result).toBe('<p>abc</p>\n<pre><code>cba</code></pre>\n')
+  result = convert(['# abc', '```', 'cba', '```'])
+  expect(result).toBe('<h1>abc</h1>\n<pre><code>cba</code></pre>\n')
+  result = convert(['abc', '```', 'cba', '```', 'def'])
+  expect(result).toBe('<p>abc</p>\n<pre><code>cba</code></pre>\n<p>def</p>\n')
+  result = convert(['abc', '```', 'cba', '```', '# def'])
+  expect(result).toBe('<p>abc</p>\n<pre><code>cba</code></pre>\n<h1>def</h1>\n')
+})

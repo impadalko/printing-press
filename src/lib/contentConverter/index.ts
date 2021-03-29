@@ -3,6 +3,11 @@ import * as HTML from './HTML'
 type OptionalHTMLItem = HTML.HTMLItem | null
 
 const getNextHTMLItem = (current: OptionalHTMLItem, line: string): OptionalHTMLItem => {
+  if (current instanceof HTML.Code) {
+    if (line === '```') return null
+    current.extend(line)
+    return current
+  }
   if (line === '') return null
   if (line.startsWith('# ')) return new HTML.H1(line)
   if (line.startsWith('## ')) return new HTML.H2(line)
@@ -11,7 +16,8 @@ const getNextHTMLItem = (current: OptionalHTMLItem, line: string): OptionalHTMLI
   if (line.startsWith('##### ')) return new HTML.H5(line)
   if (line.startsWith('###### ')) return new HTML.H6(line)
   if (line === '---') return new HTML.HR()
-  if (current !== null && current instanceof HTML.P) {
+  if (line === '```') return new HTML.Code()
+  if (current instanceof HTML.P) {
     current.extend(line)
     return current
   }
