@@ -6,6 +6,8 @@ const parseLine = (line: string) => {
 }
 
 export class P extends HTMLItem {
+  content: string
+
   constructor(line: string) {
     super()
     this.content = parseLine(line)
@@ -14,5 +16,9 @@ export class P extends HTMLItem {
 
   extend(line: string): void {
     this.content += ' ' + parseLine(line)
+  }
+
+  getParsed(): string {
+    return `<${this.type}>${this.content}</${this.type}>`
   }
 }

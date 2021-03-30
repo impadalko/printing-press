@@ -1,7 +1,15 @@
 import { HTMLTag, HTMLItem } from './base'
 import { format } from './formatter'
 
-export class H1 extends HTMLItem {
+class Heading extends HTMLItem {
+  content = ''
+
+  getParsed(): string {
+    return `<${this.type}>${this.content}</${this.type}>`
+  }
+}
+
+export class H1 extends Heading {
   constructor(line: string) {
     super()
     this.content = format(line.replace(/^# /, ''))
@@ -9,7 +17,7 @@ export class H1 extends HTMLItem {
   }
 }
 
-export class H2 extends HTMLItem {
+export class H2 extends Heading {
   constructor(line: string) {
     super()
     this.content = format(line.replace(/^## /, ''))
@@ -17,7 +25,7 @@ export class H2 extends HTMLItem {
   }
 }
 
-export class H3 extends HTMLItem {
+export class H3 extends Heading {
   constructor(line: string) {
     super()
     this.content = format(line.replace(/^### /, ''))
@@ -25,7 +33,7 @@ export class H3 extends HTMLItem {
   }
 }
 
-export class H4 extends HTMLItem {
+export class H4 extends Heading {
   constructor(line: string) {
     super()
     this.content = format(line.replace(/^#### /, ''))
@@ -33,7 +41,7 @@ export class H4 extends HTMLItem {
   }
 }
 
-export class H5 extends HTMLItem {
+export class H5 extends Heading {
   constructor(line: string) {
     super()
     this.content = format(line.replace(/^##### /, ''))
@@ -41,7 +49,7 @@ export class H5 extends HTMLItem {
   }
 }
 
-export class H6 extends HTMLItem {
+export class H6 extends Heading {
   constructor(line: string) {
     super()
     this.content = format(line.replace(/^###### /, ''))

@@ -12,10 +12,9 @@ export enum HTMLTag {
 }
 
 export class HTMLItem {
-  content = ''
   type: HTMLTag = HTMLTag.None
 
   getParsed(): string {
-    return this.type !== HTMLTag.None ? `<${this.type}>${this.content}</${this.type}>` : ''
+    throw new Error('Cannot call getParsed() of HTMLItem. Did you forget to override this method?')
   }
 }

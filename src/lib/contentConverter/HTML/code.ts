@@ -1,19 +1,19 @@
 import { HTMLTag, HTMLItem } from './base'
 
 export class Code extends HTMLItem {
-  children: string[]
+  content: string
 
   constructor() {
     super()
+    this.content = ''
     this.type = HTMLTag.Code
-    this.children = []
   }
 
   extend(line: string): void {
-    this.children.push(line)
+    this.content += line + '\n'
   }
 
   getParsed(): string {
-    return `<pre><${this.type}>${this.children.join('\n')}</${this.type}></pre>`
+    return `<pre><${this.type}>${this.content}</${this.type}></pre>`
   }
 }

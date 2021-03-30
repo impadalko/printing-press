@@ -17,11 +17,11 @@ test('Convert mixed paragraphs and headings correctly', () => {
 
 test('Convert blocks of code with paragraphs and headings correctly', () => {
   let result = convert(['abc', '```', 'cba', '```'])
-  expect(result).toBe('<p>abc</p>\n<pre><code>cba</code></pre>\n')
+  expect(result).toBe('<p>abc</p>\n<pre><code>cba\n</code></pre>\n')
   result = convert(['# abc', '```', 'cba', '```'])
-  expect(result).toBe('<h1>abc</h1>\n<pre><code>cba</code></pre>\n')
+  expect(result).toBe('<h1>abc</h1>\n<pre><code>cba\n</code></pre>\n')
   result = convert(['abc', '```', 'cba', '```', 'def'])
-  expect(result).toBe('<p>abc</p>\n<pre><code>cba</code></pre>\n<p>def</p>\n')
+  expect(result).toBe('<p>abc</p>\n<pre><code>cba\n</code></pre>\n<p>def</p>\n')
   result = convert(['abc', '```', 'cba', '```', '# def'])
-  expect(result).toBe('<p>abc</p>\n<pre><code>cba</code></pre>\n<h1>def</h1>\n')
+  expect(result).toBe('<p>abc</p>\n<pre><code>cba\n</code></pre>\n<h1>def</h1>\n')
 })
