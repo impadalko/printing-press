@@ -18,6 +18,10 @@ export const format = (line: string): string => {
   while ((match = codeRegex.exec(line))) {
     line = line.replace(match[0], `<code>${match[1]}</code>`)
   }
+  const imageRegex = /!\[([^[\]]+)\]\(([^()]+)\)/g
+  while ((match = imageRegex.exec(line))) {
+    line = line.replace(match[0], `<img alt="${match[1]}" src="${match[2]}">`)
+  }
   const linkRegex = /\[([^[\]]+)\]\(([^()]+)\)/g
   while ((match = linkRegex.exec(line))) {
     line = line.replace(match[0], `<a href="${match[2]}">${match[1]}</a>`)
