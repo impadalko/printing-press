@@ -9,6 +9,9 @@ export enum HTMLTag {
   HR = 'hr',
   P = 'p',
   Quote = 'blockquote',
+  OL = 'ol',
+  UL = 'ul',
+  LI = 'li',
   None = 'none',
 }
 

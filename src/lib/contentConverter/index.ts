@@ -1,18 +1,9 @@
 import * as HTML from './HTML'
+import { ParsedLine } from './parsedLine'
 
-class ParsedLine {
-  content = ''
-  quoteDepth = 0
-
-  constructor(line: string, maxDepth = Infinity) {
-    if (line === undefined) return
-    this.content = line
-    this.quoteDepth = 0
-    while (this.content.startsWith('>') && this.quoteDepth < maxDepth) {
-      this.content = this.content.replace(/>\s?/, '')
-      this.quoteDepth++
-    }
-  }
+const parseListItem = (line: string) => {
+  if (line.match(/^\s*-\s/)) return new HTML.UL(line)
+  return new HTML.OL(line)
 }
 
 const getNextHTMLItem = (
@@ -49,6 +40,33 @@ const getNextHTMLItem = (
       line = new ParsedLine(lines[++index], quoteDepth)
     }
     return [code, index + 1]
+  }
+  const listRegex = /^\s*(-|\d+\.)\s/
+  if (line.content.match(listRegex)) {
+    let list = parseListItem(line.content)
+    const stack = []
+    line = new ParsedLine(lines[++index], quoteDepth)
+    while (line.content.match(listRegex)) {
+      const nextList = parseListItem(line.content)
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      while (stack.length && nextList.depth < list.depth) list = stack.pop()!
+      if (list.depth === nextList.depth) {
+        if (nextList.type === list.type) list.addItems(nextList)
+        else if (stack.length) {
+          stack[stack.length - 1].addSubList(nextList)
+          list = nextList
+        } else return [list, index]
+      } else if (nextList.depth > list.depth) {
+        list.addSubList(nextList)
+        stack.push(list)
+        list = nextList
+      } else {
+        if (nextList.type === list.type) list.addItems(nextList)
+        else return [list, index]
+      }
+      line = new ParsedLine(lines[++index], quoteDepth)
+    }
+    return stack.length ? [stack[0], index] : [list, index]
   }
   const p = new HTML.P(line.content)
   index++

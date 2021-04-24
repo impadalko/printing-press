@@ -75,3 +75,32 @@ test('Converts quotes to HTML blockquote tags', () => {
   result = convert(['> a', '', '> b'])
   expect(result).toBe('<blockquote><p>a</p></blockquote>\n<blockquote><p>b</p></blockquote>\n')
 })
+
+test('Converts lists and sublists to HTML lists', () => {
+  let result = convert(['- abc', '- cba', '- xxx'])
+  expect(result).toBe('<ul>\n<li>abc</li>\n<li>cba</li>\n<li>xxx</li>\n</ul>\n')
+  result = convert(['1. abc', '1. cba', '1. xxx'])
+  expect(result).toBe('<ol>\n<li>abc</li>\n<li>cba</li>\n<li>xxx</li>\n</ol>\n')
+  result = convert(['- abc', '  - cba'])
+  expect(result).toBe('<ul>\n<li>\nabc\n<ul>\n<li>cba</li>\n</ul>\n</li>\n</ul>\n')
+  result = convert(['- abc', '  - cba', '- xxx'])
+  expect(result).toBe('<ul>\n<li>\nabc\n<ul>\n<li>cba</li>\n</ul>\n</li>\n<li>xxx</li>\n</ul>\n')
+  result = convert(['- abc', '  - cba', '    - xxx'])
+  expect(result).toBe(
+    '<ul>\n<li>\nabc\n<ul>\n<li>\ncba\n<ul>\n<li>xxx</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n'
+  )
+  result = convert(['- abc', '  - cba', '    1. xxx'])
+  expect(result).toBe(
+    '<ul>\n<li>\nabc\n<ul>\n<li>\ncba\n<ol>\n<li>xxx</li>\n</ol>\n</li>\n</ul>\n</li>\n</ul>\n'
+  )
+  result = convert(['- abc', '  - cba', '  1. xxx'])
+  expect(result).toBe(
+    '<ul>\n<li>\nabc\n<ul>\n<li>cba</li>\n</ul>\n<ol>\n<li>xxx</li>\n</ol>\n</li>\n</ul>\n'
+  )
+  result = convert(['- abc', '  - cba', '1. xxx'])
+  expect(result).toBe(
+    '<ul>\n<li>\nabc\n<ul>\n<li>cba</li>\n</ul>\n</li>\n</ul>\n<ol>\n<li>xxx</li>\n</ol>\n'
+  )
+  result = convert(['- abc', '1. xxx'])
+  expect(result).toBe('<ul>\n<li>abc</li>\n</ul>\n<ol>\n<li>xxx</li>\n</ol>\n')
+})

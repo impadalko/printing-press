@@ -37,4 +37,8 @@ test('Convert quotes with other elements inside correctly', () => {
   expect(result).toBe('<blockquote><p>abc cba</p>\n<h1>def</h1></blockquote>\n')
   result = convert(['> abc', '> cba', '> # def'])
   expect(result).toBe('<blockquote><p>abc cba</p>\n<h1>def</h1></blockquote>\n')
+  result = convert(['> - abc', '>   - cba', '> - def'])
+  expect(result).toBe(
+    '<blockquote><ul>\n<li>\nabc\n<ul>\n<li>cba</li>\n</ul>\n</li>\n<li>def</li>\n</ul></blockquote>\n'
+  )
 })
