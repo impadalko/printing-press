@@ -4,11 +4,12 @@
   "description": "A Markdown static site generator built in TypeScript",
   "main": "./dist/api/index.js",
   "repository": "https://github.com/impadalko/printing-press.git",
-  "author": "impadalko",
+  "author": "impadalko <dev@impadalko.com>",
   "license": "GPL-3.0-or-later",
   "private": false,
   "scripts": {
-    "build": "tsc",
+    "build": "yarn clean && tsc",
+    "clean": "rm -rf dist/",
     "test": "jest tests/",
     "lint": "eslint --max-warnings 0 src/ tests/",
     "prettier": "prettier src/ tests/"
@@ -16,6 +17,10 @@
   "bin": {
     "printing-press": "./bin/index.js"
   },
+  "files": [
+    "dist/**/*",
+    "bin/index.js"
+  ],
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
     "@types/jest": "^26.0.21",
