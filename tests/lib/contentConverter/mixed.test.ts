@@ -17,20 +17,20 @@ test('Convert mixed paragraphs and headings correctly', () => {
 
 test('Convert blocks of code with paragraphs and headings correctly', () => {
   let result = convert(['abc', '```', 'cba', '```'])
-  expect(result).toBe('<p>abc</p>\n<pre><code>cba\n</code></pre>\n')
+  expect(result).toBe('<p>abc</p>\n<pre><code>\ncba\n</code></pre>\n')
   result = convert(['# abc', '```', 'cba', '```'])
-  expect(result).toBe('<h1>abc</h1>\n<pre><code>cba\n</code></pre>\n')
+  expect(result).toBe('<h1>abc</h1>\n<pre><code>\ncba\n</code></pre>\n')
   result = convert(['abc', '```', 'cba', '```', 'def'])
-  expect(result).toBe('<p>abc</p>\n<pre><code>cba\n</code></pre>\n<p>def</p>\n')
+  expect(result).toBe('<p>abc</p>\n<pre><code>\ncba\n</code></pre>\n<p>def</p>\n')
   result = convert(['abc', '```', 'cba', '```', '# def'])
-  expect(result).toBe('<p>abc</p>\n<pre><code>cba\n</code></pre>\n<h1>def</h1>\n')
+  expect(result).toBe('<p>abc</p>\n<pre><code>\ncba\n</code></pre>\n<h1>def</h1>\n')
 })
 
 test('Convert quotes with other elements inside correctly', () => {
   let result = convert(['> a', '> ```', '> abc', '> ```'])
-  expect(result).toBe('<blockquote><p>a</p>\n<pre><code>abc\n</code></pre></blockquote>\n')
+  expect(result).toBe('<blockquote><p>a</p>\n<pre><code>\nabc\n</code></pre></blockquote>\n')
   result = convert(['> ```', '> > abc', '> ```'])
-  expect(result).toBe('<blockquote><pre><code>> abc\n</code></pre></blockquote>\n')
+  expect(result).toBe('<blockquote><pre><code>\n> abc\n</code></pre></blockquote>\n')
   result = convert(['> # abc', '> cba', '> def'])
   expect(result).toBe('<blockquote><h1>abc</h1>\n<p>cba def</p></blockquote>\n')
   result = convert(['> abc', '> cba', '> # def'])

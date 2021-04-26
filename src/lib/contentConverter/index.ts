@@ -32,8 +32,8 @@ const getNextHTMLItem = (
   if (line.content.startsWith('##### ')) return [new HTML.H5(line.content), index + 1]
   if (line.content.startsWith('###### ')) return [new HTML.H6(line.content), index + 1]
   if (line.content === '---') return [new HTML.HR(), index + 1]
-  if (line.content === '```') {
-    const code = new HTML.Code()
+  if (line.content.startsWith('```')) {
+    const code = new HTML.Code(line.content.substr(3))
     line = new ParsedLine(lines[++index], quoteDepth)
     while (index < lines.length && line.content != '```') {
       code.extend(line.content)

@@ -48,17 +48,19 @@ test('Converts triple dash to HTML horizontal rule', () => {
 
 test('Converts blocks of code to HTML code + pre tags', () => {
   let result = convert(['```'])
-  expect(result).toBe('<pre><code></code></pre>\n')
+  expect(result).toBe('<pre><code>\n</code></pre>\n')
   result = convert(['```', '```'])
-  expect(result).toBe('<pre><code></code></pre>\n')
+  expect(result).toBe('<pre><code>\n</code></pre>\n')
   result = convert(['```', 'abc', '```'])
-  expect(result).toBe('<pre><code>abc\n</code></pre>\n')
+  expect(result).toBe('<pre><code>\nabc\n</code></pre>\n')
   result = convert(['```', 'abc', ' cba', '```'])
-  expect(result).toBe('<pre><code>abc\n cba\n</code></pre>\n')
+  expect(result).toBe('<pre><code>\nabc\n cba\n</code></pre>\n')
   result = convert(['```', 'abc', '', 'cba', '```'])
-  expect(result).toBe('<pre><code>abc\n\ncba\n</code></pre>\n')
+  expect(result).toBe('<pre><code>\nabc\n\ncba\n</code></pre>\n')
   result = convert(['```', 'abc', '>', 'cba', '```'])
-  expect(result).toBe('<pre><code>abc\n>\ncba\n</code></pre>\n')
+  expect(result).toBe('<pre><code>\nabc\n>\ncba\n</code></pre>\n')
+  result = convert(['```typescript', 'abc', 'cba', '```'])
+  expect(result).toBe('<pre><code class="typescript">\nabc\ncba\n</code></pre>\n')
 })
 
 test('Converts quotes to HTML blockquote tags', () => {
