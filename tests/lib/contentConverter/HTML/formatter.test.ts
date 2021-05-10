@@ -11,8 +11,6 @@ test('Format bold, italic, strikethrough, code and links correctly', () => {
   expect(result).toBe('<code>abc</code>')
   result = format('![Image](http://image.com)')
   expect(result).toBe('<img alt="Image" src="http://image.com">')
-  result = format('http://example.com')
-  expect(result).toBe('<a href="http://example.com">http://example.com</a>')
   result = format('[Example](http://example.com)')
   expect(result).toBe('<a href="http://example.com">Example</a>')
   result = format('*i1* **b1** **b2** *i2*')
@@ -23,7 +21,7 @@ test('Format bold, italic, strikethrough, code and links correctly', () => {
   )
   expect(result).toBe(
     '<a href="https://url1.com">URL1</a> <img alt="Image" src="https://image.com"> ' +
-      '<a href="https://url2.com">https://url2.com</a> <a href="https://url3.com">https://url3.com</a> ' +
-      '<img alt="Image2" src="https://image2.com"> <a href="https://url4.com">URL4</a>'
+      'https://url2.com https://url3.com <img alt="Image2" src="https://image2.com"> ' +
+      '<a href="https://url4.com">URL4</a>'
   )
 })

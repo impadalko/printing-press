@@ -1,5 +1,3 @@
-import linkifyHtml from 'linkifyjs/html'
-
 export const format = (line: string): string => {
   let match: RegExpExecArray | null = null
   const boldRegex = /\*\*([^**]+)\*\*/g
@@ -26,5 +24,5 @@ export const format = (line: string): string => {
   while ((match = linkRegex.exec(line))) {
     line = line.replace(match[0], `<a href="${match[2]}">${match[1]}</a>`)
   }
-  return linkifyHtml(line)
+  return line
 }
