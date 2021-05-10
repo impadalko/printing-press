@@ -1,9 +1,13 @@
 import fs from 'fs'
 import readline from 'readline'
-import YAML from 'yaml'
 
-export interface ParsedFile {
-  header: unknown
+interface Header {
+  title?: string
+  template?: string
+}
+
+interface ParsedFile {
+  header: Header|null
   content: string[]
 }
 
@@ -12,6 +16,20 @@ class ParsingError extends Error {
     super(`Could not parse: ${msg}`)
     Error.captureStackTrace(this, ParsingError)
   }
+}
+
+const parseHeader = (header: string): Header|null => {
+  if (!header) return null
+  const lines = header.split('\n')
+  const parsedHeader: {[k: string]: string} = {}
+  lines.forEach((line) => {
+    if (!line) return
+    const splittedLine = line.split(':')
+    if (splittedLine.length !== 2)
+      throw new ParsingError(`Line "${line}" is not valid in header`)
+    parsedHeader[splittedLine[0].trim()] = splittedLine[1].trim()
+  })
+  return parsedHeader
 }
 
 export const parseFile = async (path: string, headerDelimiter = '+++'): Promise<ParsedFile> => {
@@ -37,13 +55,9 @@ export const parseFile = async (path: string, headerDelimiter = '+++'): Promise<
 
   if (delimiterCount === 1) throw new ParsingError('Header was never closed')
 
-  try {
-    const parsedHeader = YAML.parse(header)
-    return {
-      header: parsedHeader,
-      content: content,
-    }
-  } catch (e) {
-    throw new ParsingError('Header is not a valid YAML')
+  const parsedHeader = parseHeader(header)
+  return {
+    header: parsedHeader,
+    content: content,
   }
 }

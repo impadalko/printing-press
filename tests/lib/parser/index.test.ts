@@ -29,7 +29,7 @@ test('Throws error on file with open header', () => {
 
 test('Thows error on file with invalid header', () => {
   return parseFile(`${__dirname}/invalidHeader.md`).catch((error) => {
-    expect(error.message).toMatch('Header is not a valid YAML')
+    expect(error.message).toMatch(/Line ".*" is not valid in header/)
   })
 })
 
