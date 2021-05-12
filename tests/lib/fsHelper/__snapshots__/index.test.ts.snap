@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`walk returns all files in a directory recursively 1`] = `
+Array [
+  "/home/ivan/Dev/impadalko/printing-press/tests/lib/fsHelper/testFiles/a/index.txt",
+  "/home/ivan/Dev/impadalko/printing-press/tests/lib/fsHelper/testFiles/a/x/index.txt",
+  "/home/ivan/Dev/impadalko/printing-press/tests/lib/fsHelper/testFiles/b/y/index.txt",
+  "/home/ivan/Dev/impadalko/printing-press/tests/lib/fsHelper/testFiles/index.txt",
+]
+`;

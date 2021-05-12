@@ -1,0 +1,40 @@
+import { promises as fs } from 'fs'
+import path from 'path'
+
+import { exists, walk, ensureDir } from '../../../src/lib/fsHelper'
+
+test('exists returns true when file exists', () => {
+  return exists(`${__dirname}/testFiles/index.txt`).then((data) => {
+    expect(data).toBe(true)
+  })
+})
+
+test('exists returns false when file does not exist', () => {
+  return exists(`${__dirname}/testFiles/notIndex.txt`).then((data) => {
+    expect(data).toBe(false)
+  })
+})
+
+test('walk returns all files in a directory recursively', () => {
+  return walk(`${__dirname}/testFiles`).then((data) => {
+    expect(data).toMatchSnapshot()
+  })
+})
+
+describe('ensureDir', () => {
+  const topDir = `${__dirname}/testFiles/ensureDir`
+
+  afterEach(() => {
+    return fs.rm(topDir, { recursive: true, force: true })
+  })
+
+  test('ensureDir creates a directory recursively', () => {
+    const bottomDir = path.join(topDir, 'a/b/c/')
+    const file = path.join(bottomDir, 'index.txt')
+    return ensureDir(file).then(() => {
+      exists(bottomDir).then((data) => {
+        expect(data).toBe(true)
+      })
+    })
+  })
+})
