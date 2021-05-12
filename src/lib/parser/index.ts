@@ -1,13 +1,10 @@
 import fs from 'fs'
 import readline from 'readline'
 
-interface Header {
-  title?: string
-  template?: string
-}
+type Header = { [k: string]: string }
 
 interface ParsedFile {
-  header: Header|null
+  header: Header | null
   content: string[]
 }
 
@@ -18,15 +15,14 @@ class ParsingError extends Error {
   }
 }
 
-const parseHeader = (header: string): Header|null => {
+const parseHeader = (header: string): Header | null => {
   if (!header) return null
   const lines = header.split('\n')
-  const parsedHeader: {[k: string]: string} = {}
+  const parsedHeader: Header = {}
   lines.forEach((line) => {
     if (!line) return
     const splittedLine = line.split(':')
-    if (splittedLine.length !== 2)
-      throw new ParsingError(`Line "${line}" is not valid in header`)
+    if (splittedLine.length !== 2) throw new ParsingError(`Line "${line}" is not valid in header`)
     parsedHeader[splittedLine[0].trim()] = splittedLine[1].trim()
   })
   return parsedHeader
