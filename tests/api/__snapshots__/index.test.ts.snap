@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Built files have the correct content 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <title>Test</title>
+    <meta charset=\\"UTF-8\\" />
+    <meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1\\" />
+    <meta name=\\"description\\" content=\\"\\" />
+  </head>
+  <body>
+    <p>Amazing example!</p>
+
+  </body>
+</html>
+"
+`;
+
+exports[`Built files have the correct content 2`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <title>Another example</title>
+    <meta charset=\\"UTF-8\\" />
+    <meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1\\" />
+    <meta name=\\"description\\" content=\\"\\" />
+  </head>
+  <body>
+    <h3>Amazing example!</h3>
+
+  </body>
+</html>
+"
+`;
+
+exports[`Built files have the correct content 3`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <title>Title</title>
+    <meta charset=\\"UTF-8\\" />
+    <meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1\\" />
+    <meta name=\\"description\\" content=\\"\\" />
+  </head>
+  <body>
+    <h1>Unreachable</h1>
+    <p>This should never run:</p>
+<pre><code class=\\"python\\">
+while(False):
+  print('how did you get here?')
+</code></pre>
+
+    <p>Please desconsider the previous examples</p>
+  </body>
+</html>
+"
+`;
+
+exports[`Built files have the correct content 4`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <title>Complex markdown</title>
+    <meta charset=\\"UTF-8\\" />
+    <meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1\\" />
+    <meta name=\\"description\\" content=\\"\\" />
+  </head>
+  <body>
+    <h2>Sub-title</h2>
+<blockquote><p>Quote</p>
+<blockquote><p>Nested quote</p></blockquote>
+<p>Top level quote</p></blockquote>
+<ul>
+<li>list</li>
+<li>
+still the same list
+<ul>
+<li>nested list</li>
+</ul>
+<ol>
+<li>nested ordered list</li>
+<li>another element</li>
+</ol>
+</li>
+<li>back to first list</li>
+</ul>
+<h2>Another sub-title</h2>
+<p>Test test</p>
+
+  </body>
+</html>
+"
+`;
+
+exports[`Built files have the correct content 5`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <title>Example</title>
+    <meta charset=\\"UTF-8\\" />
+    <meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1\\" />
+    <meta name=\\"description\\" content=\\"\\" />
+  </head>
+  <body>
+    <p>Another <em>example</em></p>
+<blockquote><p>This is just an <a href=\\"http://example.com\\">example</a></p>
+<p><code>Lorem Ipsum</code></p></blockquote>
+
+  </body>
+</html>
+"
+`;
