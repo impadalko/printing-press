@@ -5,6 +5,8 @@ test('Format bold, italic, strikethrough, code and links correctly', () => {
   expect(result).toBe('<bold>abc</bold>')
   result = format('*abc*')
   expect(result).toBe('<em>abc</em>')
+  result = format('_abc_')
+  expect(result).toBe('<em>abc</em>')
   result = format('~~abc~~')
   expect(result).toBe('<s>abc</s>')
   result = format('`abc`')

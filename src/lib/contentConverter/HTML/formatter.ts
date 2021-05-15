@@ -8,6 +8,10 @@ export const format = (line: string): string => {
   while ((match = italicRegex.exec(line))) {
     line = line.replace(match[0], `<em>${match[1]}</em>`)
   }
+  const alternativeItalicRegex = /_([^_]+)_/g
+  while ((match = alternativeItalicRegex.exec(line))) {
+    line = line.replace(match[0], `<em>${match[1]}</em>`)
+  }
   const strikedRegex = /~~([^~~]+)~~/g
   while ((match = strikedRegex.exec(line))) {
     line = line.replace(match[0], `<s>${match[1]}</s>`)
