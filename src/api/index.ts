@@ -1,9 +1,9 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
-import { parseFile } from '../lib/parser'
 import { convert } from '../lib/contentConverter'
 import { walk, ensureDir, exists } from '../lib/fsHelper'
+import { parseFile } from '../lib/parser'
 
 export const buildContent = async (
   templatePath: string,
