@@ -16,8 +16,10 @@ test('exists returns false when file does not exist', () => {
 })
 
 test('walk returns all files in a directory recursively', () => {
-  return walk(`${__dirname}/testFiles`).then((data) => {
-    expect(data).toMatchSnapshot()
+  const basePath = `${__dirname}/testFiles`
+  return walk(basePath).then((data) => {
+    const relativePaths = data.map((e) => path.relative(basePath, e))
+    expect(relativePaths).toMatchSnapshot()
   })
 })
 
