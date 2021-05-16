@@ -5,11 +5,15 @@ import { convert } from '../lib/contentConverter'
 import { walk, ensureDir, exists } from '../lib/fsHelper'
 import { parseFile } from '../lib/parser'
 
+interface BuildOptions {
+  defaultTemplate?: string
+}
+
 const buildContent = async (
   templatePath: string,
   contentPath: string,
   outputPath: string,
-  defaultTemplate?: string
+  buildOptions: BuildOptions = {}
 ): Promise<void> => {
   const contentFiles = await walk(contentPath)
   const loadedTemplates: { [key: string]: string } = {}
@@ -19,7 +23,7 @@ const buildContent = async (
     contentFiles.map(async (file) => {
       const parsedFile = await parseFile(file)
 
-      const template = parsedFile.header?.template || defaultTemplate
+      const template = parsedFile.header?.template || buildOptions.defaultTemplate
       if (!template) return
 
       if (!loadedTemplates[template]) {
@@ -49,6 +53,28 @@ const buildContent = async (
   )
 }
 
+const build = async (
+  templatePath: string,
+  contentPath: string,
+  outputPath: string,
+  publicPath?: string,
+  buildOptions: BuildOptions = {}
+): Promise<void> => {
+  await buildContent(templatePath, contentPath, outputPath, buildOptions)
+
+  if (publicPath) {
+    const publicFiles = await walk(publicPath)
+    await Promise.all(
+      publicFiles.map(async (src) => {
+        const dest = path.join(outputPath, path.relative(publicPath, src))
+        await ensureDir(dest)
+        await fs.copyFile(src, dest)
+      })
+    )
+  }
+}
+
 export default {
-  buildContent
+  build,
+  buildContent,
 }

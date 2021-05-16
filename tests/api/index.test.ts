@@ -11,6 +11,7 @@ const removeExt = (file: string): string => {
 const templatePath = `${__dirname}/templates`
 const contentPath = `${__dirname}/content`
 const outputPath = `${__dirname}/output`
+const publicPath = `${__dirname}/public`
 const defaultTemplate = 'default.html'
 
 afterEach(() => {
@@ -18,23 +19,33 @@ afterEach(() => {
 })
 
 test('Built files have the same file structure as the content files', async () => {
-  await api.buildContent(templatePath, contentPath, outputPath, defaultTemplate)
+  await api.buildContent(templatePath, contentPath, outputPath, { defaultTemplate })
 
   const inputFiles = new Set(
-    (await walk(`${__dirname}/content`)).map(removeExt).map((e) => path.relative(contentPath, e))
+    (await walk(contentPath)).map(removeExt).map((e) => path.relative(contentPath, e))
   )
   const outputFiles = new Set(
-    (await walk(`${__dirname}/output`)).map(removeExt).map((e) => path.relative(outputPath, e))
+    (await walk(outputPath)).map(removeExt).map((e) => path.relative(outputPath, e))
   )
   expect(inputFiles).toEqual(outputFiles)
 })
 
 test('Built files have the correct content', async () => {
-  await api.buildContent(templatePath, contentPath, outputPath, defaultTemplate)
+  await api.buildContent(templatePath, contentPath, outputPath, { defaultTemplate })
 
-  const outputFiles = await walk(`${__dirname}/output`)
+  const outputFiles = await walk(outputPath)
   for (const output of outputFiles) {
     const content = await fs.readFile(output, { encoding: 'utf-8' })
     expect(content).toMatchSnapshot()
+  }
+})
+
+test('Public folder files are copied to the output folder', async () => {
+  await api.build(templatePath, contentPath, outputPath, publicPath)
+
+  const outputFiles = new Set((await walk(outputPath)).map((e) => path.relative(outputPath, e)))
+  const publicFiles = (await walk(publicPath)).map((e) => path.relative(publicPath, e))
+  for (const publicFile of publicFiles) {
+    expect(outputFiles.has(publicFile)).toBe(true)
   }
 })
