@@ -5,7 +5,7 @@ import { convert } from '../lib/contentConverter'
 import { walk, ensureDir, exists } from '../lib/fsHelper'
 import { parseFile } from '../lib/parser'
 
-export const buildContent = async (
+const buildContent = async (
   templatePath: string,
   contentPath: string,
   outputPath: string,
@@ -47,4 +47,8 @@ export const buildContent = async (
       await fs.writeFile(outputFilePath, output)
     })
   )
+}
+
+export default {
+  buildContent
 }

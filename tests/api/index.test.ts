@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
-import { buildContent } from '../../src/api'
+import api from '../../src/api'
 import { walk } from '../../src/lib/fsHelper'
 
 const removeExt = (file: string): string => {
@@ -18,7 +18,7 @@ afterEach(() => {
 })
 
 test('Built files have the same file structure as the content files', async () => {
-  await buildContent(templatePath, contentPath, outputPath, defaultTemplate)
+  await api.buildContent(templatePath, contentPath, outputPath, defaultTemplate)
 
   const inputFiles = new Set(
     (await walk(`${__dirname}/content`)).map(removeExt).map((e) => path.relative(contentPath, e))
@@ -30,7 +30,7 @@ test('Built files have the same file structure as the content files', async () =
 })
 
 test('Built files have the correct content', async () => {
-  await buildContent(templatePath, contentPath, outputPath, defaultTemplate)
+  await api.buildContent(templatePath, contentPath, outputPath, defaultTemplate)
 
   const outputFiles = await walk(`${__dirname}/output`)
   for (const output of outputFiles) {
