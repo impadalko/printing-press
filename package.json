@@ -12,7 +12,7 @@
     "clean": "rm -rf dist/",
     "test": "jest tests/",
     "lint": "eslint --max-warnings 0 src/ tests/",
-    "prettier": "prettier src/** tests/**"
+    "prettier": "prettier src/** tests/** README.md"
   },
   "bin": {
     "printing-press": "./bin/index.js"
