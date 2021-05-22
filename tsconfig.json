@@ -4,5 +4,9 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "exclude": ["tests/"]
+  "exclude": ["tests/"],
+  "typedocOptions": {
+    "entryPoints": ["src/api/index.ts"],
+    "out": "docs"
+  }
 }

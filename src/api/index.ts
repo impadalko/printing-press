@@ -5,10 +5,18 @@ import { convert } from '../lib/contentConverter'
 import { walk, ensureDir, exists } from '../lib/fsHelper'
 import { parseFile } from '../lib/parser'
 
-interface BuildOptions {
+export interface BuildOptions {
+  /** Path to the (optional) default template (relative to template path) */
   defaultTemplate?: string
 }
 
+/**
+ * Build your website content
+ * @param templatePath - Path to template folder
+ * @param contentPath - Path to content folder
+ * @param outputPath - Path to output folder
+ * @param buildOptions - Options for the build process
+ */
 const buildContent = async (
   templatePath: string,
   contentPath: string,
@@ -53,6 +61,14 @@ const buildContent = async (
   )
 }
 
+/**
+ * Build your website
+ * @param templatePath - Path to template folder
+ * @param contentPath - Path to content folder
+ * @param outputPath - Path to output folder
+ * @param publicPath - Path to public folder
+ * @param buildOptions - Options for the build process
+ */
 const build = async (
   templatePath: string,
   contentPath: string,
