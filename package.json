@@ -21,6 +21,13 @@
     "dist/**/*",
     "bin/index.js"
   ],
+  "keywords": [
+    "blog",
+    "generator",
+    "markdown",
+    "ssg",
+    "website"
+  ],
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
     "@types/jest": "^26.0.21",
