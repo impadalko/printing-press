@@ -1,6 +1,6 @@
 {
   "name": "printing-press",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A Markdown static site generator built in TypeScript",
   "main": "./dist/api/index.js",
   "repository": "https://github.com/impadalko/printing-press.git",
