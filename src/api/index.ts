@@ -31,6 +31,7 @@ const buildContent = async (
     contentFiles.map(async (file) => {
       try {
         const parsedFile = await parseFile(file)
+        // Check if draft === 'true' in header
 
         const template = parsedFile.header?.template || buildOptions.defaultTemplate
         if (!template) return
