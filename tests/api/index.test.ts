@@ -12,6 +12,7 @@ const templatePath = `${__dirname}/templates`
 const contentPath = `${__dirname}/content`
 const outputPath = `${__dirname}/output`
 const publicPath = `${__dirname}/public`
+const draftPath = `${__dirname}/draft`
 const defaultTemplate = 'default.html'
 
 afterEach(() => {
@@ -48,4 +49,11 @@ test('Public folder files are copied to the output folder', async () => {
   for (const publicFile of publicFiles) {
     expect(outputFiles.has(publicFile)).toBe(true)
   }
+})
+
+test('Files with draft in the header are ignored', async () => {
+  await api.buildContent(templatePath, draftPath, outputPath)
+
+  const outputFiles = await walk(outputPath)
+  expect(outputFiles).toMatchSnapshot()
 })

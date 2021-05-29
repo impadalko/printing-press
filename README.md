@@ -76,6 +76,7 @@ Most keys are arbitrary strings you define and that can be then used in your tem
 keys are:
 
 - template: Defines which template will be used for building this file (relative to the template folder root)
+- draft: If set to `true` this file will be ignored
 
 Note that **the header is required** even if no keys are defined.
 
