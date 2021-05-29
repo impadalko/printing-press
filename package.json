@@ -12,7 +12,9 @@
     "clean": "rm -rf dist/",
     "test": "jest tests/",
     "lint": "eslint --max-warnings 0 src/ tests/",
-    "prettier": "prettier src/** tests/** README.md"
+    "prettier": "prettier src/** tests/** README.md",
+    "preversion": "yarn test && typedoc && git add docs/ && git commit -m 'Update docs'",
+    "postversion": "git push --tags && git push"
   },
   "bin": {
     "printing-press": "./bin/index.js"
