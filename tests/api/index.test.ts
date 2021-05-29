@@ -42,7 +42,7 @@ test('Built files have the correct content', async () => {
 })
 
 test('Public folder files are copied to the output folder', async () => {
-  await api.build(templatePath, contentPath, outputPath, publicPath)
+  await api.build(templatePath, contentPath, outputPath, publicPath, { defaultTemplate })
 
   const outputFiles = new Set((await walk(outputPath)).map((e) => path.relative(outputPath, e)))
   const publicFiles = (await walk(publicPath)).map((e) => path.relative(publicPath, e))

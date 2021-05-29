@@ -34,7 +34,10 @@ const buildContent = async (
         if (parsedFile.header?.draft === 'true') return
 
         const template = parsedFile.header?.template || buildOptions.defaultTemplate
-        if (!template) return
+        if (!template) {
+          console.error(`${file}: Header has no template and no default template was given`)
+          return
+        }
 
         if (!loadedTemplates[template]) {
           const templateFilePath = path.join(templatePath, template)
