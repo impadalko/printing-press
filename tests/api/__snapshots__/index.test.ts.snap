@@ -114,6 +114,6 @@ exports[`Built files have the correct content 5`] = `
 
 exports[`Files with draft in the header are ignored 1`] = `
 Array [
-  "/home/ivan/Dev/impadalko/printing-press/tests/api/output/b.html",
+  "b.html",
 ]
 `;

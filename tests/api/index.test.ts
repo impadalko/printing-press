@@ -54,6 +54,6 @@ test('Public folder files are copied to the output folder', async () => {
 test('Files with draft in the header are ignored', async () => {
   await api.buildContent(templatePath, draftPath, outputPath)
 
-  const outputFiles = await walk(outputPath)
+  const outputFiles = (await walk(outputPath)).map((e) => path.relative(outputPath, e))
   expect(outputFiles).toMatchSnapshot()
 })
