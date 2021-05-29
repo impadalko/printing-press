@@ -23,6 +23,13 @@ test('walk returns all files in a directory recursively', () => {
   })
 })
 
+test('walk returns empty array on non-existent folder', () => {
+  const basePath = `${__dirname}/nonExistentFolder`
+  return walk(basePath).then((data) => {
+    expect(data).toEqual([])
+  })
+})
+
 describe('ensureDir', () => {
   const topDir = `${__dirname}/testFiles/ensureDir`
 

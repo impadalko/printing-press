@@ -2,6 +2,7 @@ import { promises as fs } from 'fs'
 import path from 'path'
 
 export const walk = async (inputPath: string): Promise<string[]> => {
+  if (!(await exists(inputPath))) return []
   const dirContent = await fs.readdir(inputPath, { withFileTypes: true })
   let files: string[] = []
   for (const entry of dirContent) {
