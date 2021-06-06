@@ -1,4 +1,5 @@
 import { HTMLTag, HTMLItem } from './base'
+import { format } from './formatter'
 
 class ListItem implements HTMLItem {
   type = HTMLTag.LI
@@ -6,7 +7,7 @@ class ListItem implements HTMLItem {
   children: List[] = []
 
   constructor(content: string) {
-    this.content = content
+    this.content = format(content)
   }
 
   extend(list: List): void {

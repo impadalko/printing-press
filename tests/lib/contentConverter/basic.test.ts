@@ -105,4 +105,6 @@ test('Converts lists and sublists to HTML lists', () => {
   )
   result = convert(['- abc', '1. xxx'])
   expect(result).toBe('<ul>\n<li>abc</li>\n</ul>\n<ol>\n<li>xxx</li>\n</ol>\n')
+  result = convert(['- **abc**', '- _def_'])
+  expect(result).toBe('<ul>\n<li><bold>abc</bold></li>\n<li><em>def</em></li>\n</ul>\n')
 })
