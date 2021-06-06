@@ -151,4 +151,4 @@ All available options can be seem by using the `--help/-h` option.
 
 ### API
 
-A Node.js API is available and a basic documentation can be acessed at https://impadalko.github.io/printing-press/
+A Node.js API is available and a basic documentation can be acessed at https://impadalko.com/printing-press/
