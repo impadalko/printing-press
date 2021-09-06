@@ -61,8 +61,8 @@
 				<a href="#printing-press" id="printing-press" style="color: inherit; text-decoration: none;">
 					<h1>Printing Press</h1>
 				</a>
-				<p>Printing press is a static site generator (SSG) built in Typescript. Write your content in Markdown
-				and your templates in a ejs-like syntax.</p>
+				<p>Printing press is a no dependencies static site generator (SSG) built in Typescript. Write your
+				content in Markdown and your templates in a ejs-like syntax.</p>
 				<a href="#why-should-i-use-this-instead-of-others-ssgs" id="why-should-i-use-this-instead-of-others-ssgs" style="color: inherit; text-decoration: none;">
 					<h2>Why should I use this instead of others SSGs?</h2>
 				</a>
@@ -89,7 +89,7 @@
 				<p>To install using yarn:</p>
 				<pre><code><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">add</span><span style="color: #000000"> </span><span style="color: #001080">printing</span><span style="color: #000000">-</span><span style="color: #001080">press</span><span style="color: #000000"> --</span><span style="color: #001080">dev</span>
 </code></pre>
-				<p>To instal using npm</p>
+				<p>To install using npm</p>
 				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> </span><span style="color: #001080">printing</span><span style="color: #000000">-</span><span style="color: #001080">press</span><span style="color: #000000"> -</span><span style="color: #0070C1">D</span>
 </code></pre>
 				<a href="#building" id="building" style="color: inherit; text-decoration: none;">
@@ -176,18 +176,20 @@
 				<p>or</p>
 				<pre><code><span style="color: #001080">npx</span><span style="color: #000000"> </span><span style="color: #001080">printing</span><span style="color: #000000">-</span><span style="color: #001080">press</span>
 </code></pre>
-				<p>The required arguments are:</p>
+				<p>The configuration is made through a JSON file named <code>.printingpressrc</code> placed in the folder where
+				you will run the command.</p>
+				<p>The required keys are:</p>
 				<ul>
-					<li><code>--template/-t</code>: Path to your template files.</li>
-					<li><code>--content/-c</code>: Path to your content files.</li>
-					<li><code>--output/-o</code>: Path to save the output of the building process.</li>
+					<li><code>template</code>: Path to your template files.</li>
+					<li><code>content</code>: Path to your content files.</li>
+					<li><code>output</code>: Path to save the output of the building process.</li>
 				</ul>
-				<p>The optional arguments are:</p>
+				<p>The optional keys are:</p>
 				<ul>
-					<li><code>--public/-p</code>: Path to your public folder</li>
-					<li><code>--default-template/-d</code>: Default template to use when there is no template specified by the content file</li>
+					<li><code>public</code>: Path to your public folder</li>
+					<li><code>defaultTemplate</code>: Default template to use when there is no template specified by the content file</li>
 				</ul>
-				<p>All available options can be seem by using the <code>--help/-h</code> option.</p>
+				<p>An example of this file can be seem <a href="example/.printingpressrc">here</a></p>
 				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
 					<h3>API</h3>
 				</a>
