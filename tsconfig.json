@@ -2,6 +2,7 @@
   "extends": "@tsconfig/recommended/tsconfig.json",
   "rootDir": "src",
   "compilerOptions": {
+    "esModuleInterop": true,
     "outDir": "dist"
   },
   "exclude": ["tests/"],

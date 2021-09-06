@@ -1,7 +1,7 @@
 # Printing Press
 
-Printing press is a static site generator (SSG) built in Typescript. Write your content in Markdown
-and your templates in a ejs-like syntax.
+Printing press is a no dependencies static site generator (SSG) built in Typescript. Write your
+content in Markdown and your templates in a ejs-like syntax.
 
 ## Why should I use this instead of others SSGs?
 
@@ -31,7 +31,7 @@ To install using yarn:
 yarn add printing-press --dev
 ```
 
-To instal using npm
+To install using npm
 
 ```
 npm install printing-press -D
@@ -136,18 +136,21 @@ or
 npx printing-press
 ```
 
-The required arguments are:
+The configuration is made through a JSON file named `.printingpressrc` placed in the folder where
+you will run the command.
 
-- `--template/-t`: Path to your template files.
-- `--content/-c`: Path to your content files.
-- `--output/-o`: Path to save the output of the building process.
+The required keys are:
 
-The optional arguments are:
+- `template`: Path to your template files.
+- `content`: Path to your content files.
+- `output`: Path to save the output of the building process.
 
-- `--public/-p`: Path to your public folder
-- `--default-template/-d`: Default template to use when there is no template specified by the content file
+The optional keys are:
 
-All available options can be seem by using the `--help/-h` option.
+- `public`: Path to your public folder
+- `defaultTemplate`: Default template to use when there is no template specified by the content file
+
+An example of this file can be seem [here](example/.printingpressrc)
 
 ### API
 

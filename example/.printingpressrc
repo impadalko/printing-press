@@ -1,0 +1,7 @@
+{
+  "content": "content",
+  "template": "templates",
+  "output": "output",
+  "public": "public",
+  "defaultTemplate": "default.html"
+}
