@@ -2,7 +2,6 @@ import { promises as fs } from 'fs'
 
 import api from '../api'
 
-
 const main = async () => {
   const configFile = await fs.readFile('.printingpressrc', { encoding: 'utf8' })
   const {
