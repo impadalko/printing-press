@@ -1,6 +1,7 @@
+import { promises as fs } from 'fs'
+
 import api from '../api'
 
-import { promises as fs } from 'fs'
 
 const main = async () => {
   const configFile = await fs.readFile('.printingpressrc', { encoding: 'utf8' })
